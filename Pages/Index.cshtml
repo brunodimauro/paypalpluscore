@@ -1,0 +1,97 @@
+﻿@page
+@using ppp.Pages
+@model IndexModel
+
+<script src="https://www.paypalobjects.com/webstatic/ppplusdcc/ppplusdcc.min.js" type="text/javascript">
+</script>
+<div id="ppplusDiv"></div>
+
+<button type="submit" id="continueButton" onclick="ppp.doContinue(); return false;">Checkout</button>
+
+<div class="row">
+    <div class="col-md-12">
+        <input id="approvalUrl" type="text" class="form-control" value="@ViewData["approvalUrl"]" />
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <input id="Environment" type="text" class="form-control" value="@ViewData["Environment"]" />
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <input id="PayerEmail" type="text" class="form-control" value="@ViewData["PayerEmail"]" />
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <input id="PayerFirstName" type="text" class="form-control" value="@ViewData["PayerFirstName"]" />
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <input id="PayerLastName" type="text" class="form-control" value="@ViewData["PayerLastName"]" />
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <input id="PayerCPF" type="text" class="form-control" value="@ViewData["PayerCPF"]" />
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <input id="PayerPhone" type="text" class="form-control" value="@ViewData["PayerPhone"]" />
+    </div>
+</div>
+
+<script>
+
+    var ppp;
+    //PAYPAL
+    function generatePaymentPayPal() {
+        debugger;
+        var config = {
+            "approvalUrl": $('#approvalUrl').val(),
+            "placeholder": "ppplusDiv",
+            "mode": $('#Environment').val(),
+            "payerEmail": $('#PayerEmail').val(),
+            "payerFirstName": $('#PayerFirstName').val(),
+            "payerLastName": $('#PayerLastName').val(),
+            "payerPhone": $('#PayerPhone').val(),
+            "payerTaxIdType": "BR_CPF",
+            "payerTaxId": $('#PayerCPF').val(),
+            "country": "BR",
+            "language": "pt_BR",
+            "buttonLocation": "outside"
+            //"disallowRememberedCards": "true"
+        };
+        ppp = PAYPAL.apps.PPP(config);
+    }
+
+    if (window.addEventListener) {
+        debugger;
+        window.addEventListener("message", messageListener, false);
+        console.log("addEventListener successful", "debug");
+    } else if (window.attachEvent) {
+        debugger;
+        window.addEventListener("onmessage", messageListener, false);
+        console.log("attachEvent successful", "debug");
+    } else {
+        log("Could not attach message listener", "debug");
+        throw new Error("Can't attach message listener");
+    }
+
+    function messageListener(event) {
+        try {
+            debugger;
+            var data = JSON.parse(event.data);
+        }
+        catch (exc) { }
+    }
+
+    $(document).ready(function () {
+        generatePaymentPayPal();
+    });
+
+
+</script>
