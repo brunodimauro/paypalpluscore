@@ -80,9 +80,9 @@ namespace ppp.Pages
                 ViewData["approvalUrl"] = linkPaymentResponse.href;
                 ViewData["Environment"] = "sandbox";
                 ViewData["PayerEmail"] = "bruno.dimauro@meucurso.com.br";
-                ViewData["PayerFirstName"] = "Bruno";
-                ViewData["PayerLastName"] = "Di Mauro Machado";
-                ViewData["PayerCPF"] = "40746506813";
+                ViewData["PayerFirstName"] = "José";
+                ViewData["PayerLastName"] = "Alves";
+                ViewData["PayerCPF"] = "66674837008";
                 ViewData["PayerPhone"] = "55 11980426523";
             }
         }
